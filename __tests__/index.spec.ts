@@ -49,7 +49,7 @@ describe('load picture image and build qrcode image', () => {
   });
 
   it('load picture image data from buffer in PNG', async () => {
-    const imageData = await loadImageDataByFilename('sample.png');
+    const imageData = await loadImageDataByFilename('sample.png', true);
 
     expect(imageData.width).toEqual(180);
     expect(imageData.height).toEqual(215);
@@ -69,7 +69,7 @@ describe('load picture image and build qrcode image', () => {
   });
 
   it('load picture image data from buffer in JPG', async () => {
-    const imageData = await loadImageDataByFilename('sample.jpg');
+    const imageData = await loadImageDataByFilename('sample.jpg', true);
 
     expect(imageData.width).toEqual(180);
     expect(imageData.height).toEqual(215);
@@ -89,7 +89,7 @@ describe('load picture image and build qrcode image', () => {
   });
 
   it('load picture image data from buffer in WebP', async () => {
-    const imageData = await loadImageDataByFilename('sample.webp');
+    const imageData = await loadImageDataByFilename('sample.webp', true);
 
     expect(imageData.width).toEqual(180);
     expect(imageData.height).toEqual(215);
