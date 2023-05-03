@@ -32,7 +32,7 @@ npm install escpos-buffer escpos-buffer-image
 
 ```js
 const { Printer, InMemory } = require('escpos-buffer');
-const ImageManager = require('escpos-buffer-image');
+const { ImageManager } = require('escpos-buffer-image');
 
 const connection = new InMemory();
 const imageManager = new ImageManager();
@@ -45,7 +45,7 @@ Use the WebUSB protocol [in Chrome](https://caniuse.com/webusb) to connect direc
 
 ```js
 import { Printer, Model, WebUSB } from 'escpos-buffer';
-import ImageManager from 'escpos-buffer-image';
+import { ImageManager } from 'escpos-buffer-image';
 
 const device = await navigator.usb.requestDevice({
   filters: [
@@ -57,6 +57,36 @@ const device = await navigator.usb.requestDevice({
 const connection = new WebUSB(device);
 const imageManager = new ImageManager();
 const printer = await Printer.CONNECT('TM-T20', connection, imageManager);
+```
+
+## Usage
+
+```js
+const { Image } = require('escpos-buffer');
+
+// Following setup above...
+await printer.setColumns(48);
+const imageData = await imageManager.loadImage('IMAGE PATH');
+const image = new Image(imageData);
+await printer.draw(image);
+if (feed > 0) {
+  await printer.feed(feed);
+}
+await printer.cutter();
+await printer.buzzer();
+await printer.drawer(Drawer.First);
+
+// For buffered connection (output to stdout)
+process.stdout.write(connection.buffer());
+
+// to print, run command bellow on terminal
+
+// For Unix
+//> node examples/image.js | lp -d PRINTER_NAME
+
+// For Windows
+//> node examples\image.js > output.bin
+//> print /d:\\%COMPUTERNAME%\PRINTER_NAME output.bin
 ```
 
 ## Available scripts

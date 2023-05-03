@@ -3,7 +3,7 @@ import * as fs from 'fs';
 
 import { load } from './helper';
 
-import ImageManager from '../src';
+import { ImageManager } from '../src';
 
 describe('print formatted text', () => {
   it('draw qrcode', async () => {
@@ -38,6 +38,7 @@ describe('print formatted text', () => {
     const imageManager = new ImageManager();
 
     const imagePath = path.join(__dirname, 'resources/sample.png');
+    // tslint:disable: non-literal-fs-path
     const imageBuffer = fs.readFileSync(imagePath);
     const imageData = await imageManager.loadImageFromBuffer(imageBuffer);
 

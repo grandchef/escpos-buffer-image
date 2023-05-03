@@ -3,8 +3,9 @@ import * as QRCode from 'qrcode';
 import * as fs from 'fs';
 import { PNG } from 'pngjs';
 
-export default class ImageManager extends Manager {
+export class ImageManager extends Manager {
   loadImage(filename: string): Promise<ImageData> {
+    // tslint:disable: non-literal-fs-path
     const data = fs.readFileSync(filename);
     return this.loadImageFromBuffer(data);
   }
