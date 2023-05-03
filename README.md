@@ -8,9 +8,11 @@
 
 Library to provide image support for escpos-buffer
 
-Image type supported:
+Supported image types:
 
+- JPEG
 - PNG
+- WebP
 
 ## Install
 
